@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbit — Interrogazione AI (prototipo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0B1E3D;
+    --navy-deep: #071527;
+    --navy-mid: #12294D;
+    --orange: #F2811D;
+    --orange-soft: #F9A752;
+    --white: #FFFFFF;
+    --paper: #F4F6F9;
+    --slate: #45516B;
+    --slate-light: #7C879E;
+    --line: rgba(11,30,61,0.1);
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: var(--body);
+    background: var(--paper);
+    color: var(--navy);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 80px;
+  }
+  .app{
+    width:100%;
+    max-width:720px;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--orange);
+    background:rgba(242,129,29,0.1);
+    border:1px solid rgba(242,129,29,0.3);
+    padding:6px 12px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:var(--display);
+    font-size:clamp(24px,4vw,32px);
+    margin-bottom:8px;
+  }
+  p.lede{
+    color:var(--slate);
+    margin-bottom:28px;
+    max-width:56ch;
+  }
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 8px 24px rgba(11,30,61,0.06);
+  }
+  label{
+    display:block;
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:6px;
+  }
+  input[type=text], textarea{
+    width:100%;
+    font-family:var(--body);
+    font-size:15px;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    color:var(--navy);
+    resize:vertical;
+  }
+  input[type=text]:focus, textarea:focus{
+    outline:2px solid var(--orange-soft);
+    outline-offset:1px;
+  }
+  .field{margin-bottom:16px;}
+  .field:last-child{margin-bottom:0;}
+  .row{display:flex; gap:12px; flex-wrap:wrap;}
+  button{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:14px;
+    border:none;
+    border-radius:10px;
+    padding:12px 20px;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  button:disabled{opacity:0.5; cursor:not-allowed;}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--orange), var(--orange-soft));
+    color:var(--navy-deep);
+  }
+  .btn-primary:hover:not(:disabled){transform:translateY(-1px); box-shadow:0 8px 20px rgba(242,129,29,0.35);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--navy);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover:not(:disabled){background:var(--paper);}
+  #status{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--slate);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--slate-light);
+  }
+  .dot.listening{background:#2E9E5B; animation:pulse 1s infinite;}
+  .dot.speaking{background:var(--orange); animation:pulse 1s infinite;}
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.3;}
+  }
+  #transcript{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-height:420px;
+    overflow-y:auto;
+    padding-right:4px;
+  }
+  .msg{
+    padding:12px 14px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.5;
+    max-width:88%;
+  }
+  .msg.ai{
+    background:var(--navy-deep);
+    color:var(--white);
+    align-self:flex-start;
+    border-bottom-left-radius:2px;
+  }
+  .msg.student{
+    background:var(--orange);
+    color:var(--navy-deep);
+    align-self:flex-end;
+    border-bottom-right-radius:2px;
+  }
+  .hidden{display:none !important;}
+  .warn{
+    font-size:13px;
+    color:#B23B1E;
+    background:rgba(178,59,30,0.08);
+    border:1px solid rgba(178,59,30,0.25);
+    padding:10px 12px;
+    border-radius:10px;
+    margin-bottom:16px;
+  }
+  footer{
+    margin-top:32px;
+    font-size:12px;
+    color:var(--slate-light);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <span class="badge">Prototipo interno · non pubblico</span>
+  <h1>Interrogazione AI</h1>
+  <p class="lede">Parla con l'AI come se fosse un'interrogazione orale: ti fa domande sull'argomento scelto, ascolta la tua risposta a voce e ti dà un feedback. Serve solo a testare l'idea, non è ancora collegata al sito principale.</p>
+
+  <div id="browser-warning" class="warn hidden">
+    Il tuo browser non supporta il riconoscimento vocale integrato (funziona su Chrome/Edge desktop e Android). Puoi comunque scrivere le risposte nel campo di testo qui sotto.
+  </div>
+
+  <div class="card" id="setup-card">
+    <div class="field">
+      <label for="topic">Argomento da interrogare</label>
+      <input type="text" id="topic" placeholder="Es. Le equazioni di secondo grado">
+    </div>
+    <div class="field">
+      <label for="notes">Appunti / contenuto su cui basare le domande (facoltativo)</label>
+      <textarea id="notes" rows="5" placeholder="Incolla qui la teoria, gli appunti o i punti chiave che lo studente deve sapere. Se lasci vuoto, l'AI userà le sue conoscenze generali sull'argomento."></textarea>
+    </div>
+    <div class="field">
+      <button class="btn-primary" id="start-btn">Inizia interrogazione</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="session-card">
+    <div id="status"><span class="dot" id="status-dot"></span><span id="status-text">Pronto</span></div>
+    <div id="transcript"></div>
+    <div class="row" style="margin-top:16px;">
+      <input type="text" id="manual-answer" placeholder="Scrivi qui la risposta se il microfono non funziona" style="flex:1; min-width:200px;">
+      <button class="btn-ghost" id="send-manual">Invia</button>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <button class="btn-ghost" id="mic-btn">🎤 Rispondi a voce</button>
+      <button class="btn-ghost" id="stop-btn">Termina interrogazione</button>
+    </div>
+  </div>
+
+  <footer>Orbit Ripetizioni — prototipo interno, chiave API gestita lato server.</footer>
+</div>
+
+<script>
+(function(){
+  const setupCard = document.getElementById('setup-card');
+  const sessionCard = document.getElementById('session-card');
+  const startBtn = document.getElementById('start-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const micBtn = document.getElementById('mic-btn');
+  const sendManualBtn = document.getElementById('send-manual');
+  const manualInput = document.getElementById('manual-answer');
+  const transcriptEl = document.getElementById('transcript');
+  const statusDot = document.getElementById('status-dot');
+  const statusText = document.getElementById('status-text');
+  const browserWarning = document.getElementById('browser-warning');
+
+  const SpeechRecognitionImpl = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const speechRecognitionSupported = !!SpeechRecognitionImpl;
+  if (!speechRecognitionSupported) {
+    browserWarning.classList.remove('hidden');
+    micBtn.disabled = true;
+  }
+
+  let recognizer = null;
+  let messages = [];
+  let italianVoice = null;
+
+  function loadItalianVoice(){
+    const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+    italianVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('it')) || null;
+  }
+  if (window.speechSynthesis) {
+    loadItalianVoice();
+    window.speechSynthesis.onvoiceschanged = loadItalianVoice;
+  }
+
+  function setStatus(text, mode){
+    statusText.textContent = text;
+    statusDot.className = 'dot' + (mode ? ' ' + mode : '');
+  }
+
+  function addMessage(role, text){
+    const div = document.createElement('div');
+    div.className = 'msg ' + (role === 'assistant' ? 'ai' : 'student');
+    div.textContent = text;
+    transcriptEl.appendChild(div);
+    transcriptEl.scrollTop = transcriptEl.scrollHeight;
+  }
+
+  function speak(text, onDone){
+    if (!window.speechSynthesis) { if (onDone) onDone(); return; }
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'it-IT';
+    if (italianVoice) utter.voice = italianVoice;
+    utter.rate = 1;
+    setStatus('L\'AI sta parlando…', 'speaking');
+    utter.onend = () => {
+      setStatus('In attesa della tua risposta', '');
+      if (onDone) onDone();
+    };
+    utter.onerror = () => {
+      setStatus('In attesa della tua risposta', '');
+      if (onDone) onDone();
+    };
+    window.speechSynthesis.speak(utter);
+  }
+
+  async function askDeepSeek(){
+    setStatus('L\'AI sta pensando alla prossima domanda…', '');
+    startBtn.disabled = true;
+    micBtn.disabled = !speechRecognitionSupported;
+    try {
+      const res = await fetch('/api/deepseek', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setStatus('Errore: ' + (data.error || 'richiesta fallita'), '');
+        return;
+      }
+      const reply = data.reply || '(nessuna risposta)';
+      messages.push({ role: 'assistant', content: reply });
+      addMessage('assistant', reply);
+      speak(reply);
+    } catch (err) {
+      setStatus('Errore di rete: impossibile contattare il server', '');
+    }
+  }
+
+  function sendStudentAnswer(text){
+    if (!text || !text.trim()) return;
+    messages.push({ role: 'user', content: text.trim() });
+    addMessage('user', text.trim());
+    askDeepSeek();
+  }
+
+  startBtn.addEventListener('click', () => {
+    const topic = document.getElementById('topic').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+    if (!topic) {
+      alert('Scrivi prima l\'argomento da interrogare.');
+      return;
+    }
+    const systemPrompt = [
+      'Sei un professore che interroga oralmente uno studente delle superiori sull\'argomento: "' + topic + '".',
+      notes ? 'Basa le domande principalmente su questi appunti/contenuti forniti dallo studente:\n' + notes : 'Non hai appunti specifici: usa le conoscenze standard del programma scolastico su questo argomento.',
+      'Fai una sola domanda alla volta, in italiano, con un tono professionale ma incoraggiante.',
+      'Dopo ogni risposta dello studente, valuta brevemente se è corretta o cosa manca, poi passa alla domanda successiva.',
+      'Dopo circa 5 domande in totale, invece di fare un\'altra domanda dai una valutazione finale: un voto indicativo da 1 a 10 e un elenco puntato di 2-3 punti da ripassare.',
+      'Tieni ogni tuo messaggio breve (max 4-5 frasi), perché verrà letto ad alta voce.',
+    ].join('\n\n');
+
+    messages = [{ role: 'system', content: systemPrompt }];
+    setupCard.classList.add('hidden');
+    sessionCard.classList.remove('hidden');
+    askDeepSeek();
+  });
+
+  sendManualBtn.addEventListener('click', () => {
+    const text = manualInput.value;
+    manualInput.value = '';
+    sendStudentAnswer(text);
+  });
+  manualInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendManualBtn.click();
+  });
+
+  micBtn.addEventListener('click', () => {
+    if (!speechRecognitionSupported) return;
+    if (recognizer) { recognizer.stop(); return; }
+    recognizer = new SpeechRecognitionImpl();
+    recognizer.lang = 'it-IT';
+    recognizer.interimResults = false;
+    recognizer.maxAlternatives = 1;
+    setStatus('Ti ascolto…', 'listening');
+    micBtn.textContent = '⏹ Interrompi ascolto';
+    recognizer.onresult = (event) => {
+      const text = event.results[0][0].transcript;
+      sendStudentAnswer(text);
+    };
+    recognizer.onerror = () => {
+      setStatus('Non ho sentito bene, riprova o scrivi la risposta', '');
+    };
+    recognizer.onend = () => {
+      recognizer = null;
+      micBtn.textContent = '🎤 Rispondi a voce';
+    };
+    recognizer.start();
+  });
+
+  stopBtn.addEventListener('click', () => {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    if (recognizer) recognizer.stop();
+    sessionCard.classList.add('hidden');
+    setupCard.classList.remove('hidden');
+    startBtn.disabled = false;
+    messages = [];
+    transcriptEl.innerHTML = '';
+  });
+})();
+</script>
+</body>
+</html>
