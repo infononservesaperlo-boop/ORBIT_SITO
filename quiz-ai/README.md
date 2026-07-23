@@ -24,6 +24,16 @@ Il sito principale continua a essere pubblicato su GitHub Pages come ora:
 questo è un progetto Vercel separato, solo per testare la funzionalità.
 Quando siete soddisfatti si potrà collegare/integrare nel sito vero.
 
+### Trovare il link di test di questo branch
+
+Se il branch `claude/orbit-ai-voice-quiz-x4y29m` non è quello di produzione
+del progetto Vercel, ogni push su questo branch crea comunque un suo
+"Preview Deployment" separato. Su vercel.com → progetto → tab
+**Deployments**, cerca la riga con accanto il nome del branch
+`claude/orbit-ai-voice-quiz-x4y29m` e apri il link di quella riga
+(non quello in cima, che è la produzione): porta a `/quiz-ai/` di
+questo stesso branch.
+
 ## Test in locale
 
 ```bash
