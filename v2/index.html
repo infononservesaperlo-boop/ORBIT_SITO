@@ -14,6 +14,7 @@
 <div id="mesh"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 <div id="grain"></div>
 <div id="cursor-glow"></div>
+<div id="scroll-progress"></div>
 
 <header>
   <nav>
@@ -43,9 +44,13 @@
       </linearGradient>
     </defs>
     <circle class="orbit-star-core" cx="460" cy="460" r="5"></circle>
-    <ellipse class="orbit-ring-line" cx="460" cy="460" rx="430" ry="430"></ellipse>
-    <ellipse class="orbit-ring-line accent" cx="460" cy="460" rx="310" ry="310"></ellipse>
-    <ellipse class="orbit-ring-line" cx="460" cy="460" rx="200" ry="200"></ellipse>
+    <g class="orbit-rotate">
+      <ellipse class="orbit-ring-line" cx="460" cy="460" rx="430" ry="430"></ellipse>
+      <ellipse class="orbit-ring-line accent" cx="460" cy="460" rx="310" ry="310"></ellipse>
+    </g>
+    <g class="orbit-rotate reverse">
+      <ellipse class="orbit-ring-line" cx="460" cy="460" rx="200" ry="200"></ellipse>
+    </g>
     <circle class="planet-a" r="7">
       <animateMotion dur="16s" repeatCount="indefinite" path="M 890,460 A 430,430 0 1,1 30,460 A 430,430 0 1,1 890,460"></animateMotion>
     </circle>
@@ -57,7 +62,7 @@
     </circle>
   </svg>
   <div class="hero-inner">
-    <span class="eyebrow reveal">Milano · Online e in presenza</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Milano · Online e in presenza</span>
     <h1 class="hero-title reveal">La tua traiettoria verso<br>il <span class="gradient-text">voto che vuoi</span>.</h1>
     <p class="hero-sub reveal">Lezioni private di matematica, fisica, chimica e informatica. Dal recupero di un'insufficienza alla preparazione per i test universitari.</p>
     <div class="hero-ctas reveal">
@@ -73,9 +78,16 @@
   </div>
 </section>
 
+<div class="marquee">
+  <div class="marquee-track">
+    <span>MATEMATICA <em>·</em> FISICA <em>·</em> CHIMICA <em>·</em> INFORMATICA <em>·</em> TEST UNIVERSITARI <em>·</em> PYTHON &amp; ROBOTICA <em>·</em></span>
+    <span>MATEMATICA <em>·</em> FISICA <em>·</em> CHIMICA <em>·</em> INFORMATICA <em>·</em> TEST UNIVERSITARI <em>·</em> PYTHON &amp; ROBOTICA <em>·</em></span>
+  </div>
+</div>
+
 <section id="chi-sono">
   <div class="wrap">
-    <span class="eyebrow reveal">Chi sono</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Chi sono</span>
     <h2 class="section-title reveal">Non ti spiego solo la formula. Ti spiego <span class="gradient-text">perché funziona</span>.</h2>
     <div class="chisono-grid">
       <div class="photo-card reveal">
@@ -96,7 +108,7 @@
 
 <section id="materie">
   <div class="wrap">
-    <span class="eyebrow reveal">Cosa insegno</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Cosa insegno</span>
     <h2 class="section-title reveal">Cinque materie, <span class="gradient-text">un solo metodo</span>.</h2>
     <p class="section-lede reveal">Dalle superiori all'università, lezioni costruite sul programma reale dello studente — non su uno schema fisso.</p>
     <div class="bento-grid reveal-group">
@@ -153,7 +165,7 @@
 
 <section id="metodo">
   <div class="wrap">
-    <span class="eyebrow reveal">Metodo di studio</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Metodo di studio</span>
     <h2 class="section-title reveal">Un approccio didattico pensato per <span class="gradient-text">durare nel tempo</span>.</h2>
     <p class="section-lede reveal">Non lezioni standard: un percorso costruito sui tuoi punti di forza e sui tuoi gap, per una crescita costante.</p>
     <div class="metodo-grid reveal-group">
@@ -167,7 +179,7 @@
 
 <section id="come-funziona">
   <div class="wrap">
-    <span class="eyebrow reveal">Come funziona</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Come funziona</span>
     <h2 class="section-title reveal">Tre passaggi, come un'orbita.</h2>
     <div class="timeline reveal-group">
       <div class="timeline-step reveal"><span class="step-num">01</span><h3>Mi scrivi</h3><p>Su WhatsApp mi racconti la materia, la classe e cosa ti serve — recupero, mantenimento o preparazione a un esame.</p></div>
@@ -179,7 +191,7 @@
 
 <section id="genitori">
   <div class="wrap">
-    <span class="eyebrow reveal">Per i genitori</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Per i genitori</span>
     <h2 class="section-title reveal">"Non riesce con la matematica" non è mai <span class="gradient-text">il problema vero</span>.</h2>
     <div class="glass genitori-panel reveal">
       <p>Quasi sempre dietro un'insufficienza c'è un metodo di studio che non si è mai adattato a come funziona davvero quella materia — non uno studente che "non è portato".</p>
@@ -190,7 +202,7 @@
 
 <section id="corsi">
   <div class="wrap">
-    <span class="eyebrow reveal">Corsi</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Corsi</span>
     <h2 class="section-title reveal">Un formato per <span class="gradient-text">ogni esigenza</span>.</h2>
     <div class="courses-grid reveal-group">
       <div class="glass course-card reveal">
@@ -246,7 +258,7 @@
 
 <section id="testimonianze">
   <div class="wrap">
-    <span class="eyebrow reveal">Cosa dicono gli studenti</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Cosa dicono gli studenti</span>
     <h2 class="section-title reveal">Recensioni reali, <span class="gradient-text">da medie e superiori all'università</span>.</h2>
     <div class="testimonials-grid reveal-group">
       <div class="glass testimonial-card reveal">
@@ -270,7 +282,7 @@
 
 <section id="guide">
   <div class="wrap">
-    <span class="eyebrow reveal">Blog</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Blog</span>
     <h2 class="section-title reveal">Approfondimenti su <span class="gradient-text">studio, esami e metodo</span>.</h2>
     <p class="section-lede reveal">Metodi di studio, esercizi commentati e curiosità su matematica, fisica, chimica e informatica.</p>
     <div class="glass blog-teaser reveal">
@@ -285,7 +297,7 @@
 
 <section id="visione">
   <div class="wrap">
-    <span class="eyebrow reveal">Il progetto Orbit</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Il progetto Orbit</span>
     <h2 class="section-title reveal">Oggi sono io. <span class="gradient-text">L'idea è più grande.</span></h2>
     <p class="section-lede reveal">Orbit nasce come lezioni private, ma l'obiettivo è costruire qualcosa di più strutturato: un punto di riferimento per chi studia materie scientifiche, a qualsiasi livello.</p>
     <div class="roadmap reveal-group">
@@ -298,7 +310,7 @@
 
 <section id="contatti">
   <div class="wrap">
-    <span class="eyebrow reveal">Contatti e disponibilità</span>
+    <span class="eyebrow reveal"><svg class="eyebrow-orbit" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle class="eyebrow-orbit-dot" cx="8" cy="1.7" r="1.4"/></svg>Contatti e disponibilità</span>
     <h2 class="section-title reveal">Scrivimi e iniziamo dalla <span class="gradient-text">prima lezione</span>.</h2>
     <p class="section-lede reveal">Rispondo su WhatsApp di solito entro giornata, oppure compila il modulo qui accanto.</p>
     <div class="contatti-grid">

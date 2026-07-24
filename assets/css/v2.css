@@ -57,12 +57,19 @@ button{font-family:inherit;border:none;background:none;color:inherit;cursor:poin
   position:absolute; border-radius:50%; filter:blur(90px); opacity:0.55;
   will-change:transform;
 }
-.blob-1{width:640px;height:640px; background:radial-gradient(circle, var(--orange) 0%, transparent 70%); top:-10%; left:-8%; animation:drift1 22s ease-in-out infinite;}
-.blob-2{width:560px;height:560px; background:radial-gradient(circle, var(--violet) 0%, transparent 70%); top:30%; right:-12%; animation:drift2 26s ease-in-out infinite;}
-.blob-3{width:520px;height:520px; background:radial-gradient(circle, var(--cyan) 0%, transparent 70%); bottom:-15%; left:20%; animation:drift3 30s ease-in-out infinite;}
-@keyframes drift1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(60px,40px) scale(1.12);}}
-@keyframes drift2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-50px,60px) scale(1.08);}}
-@keyframes drift3{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-50px) scale(1.15);}}
+.blob-1{width:640px;height:640px; background:radial-gradient(circle, var(--orange) 0%, transparent 70%); top:-10%; left:-8%; animation:drift1 14s ease-in-out infinite;}
+.blob-2{width:560px;height:560px; background:radial-gradient(circle, var(--violet) 0%, transparent 70%); top:30%; right:-12%; animation:drift2 17s ease-in-out infinite;}
+.blob-3{width:520px;height:520px; background:radial-gradient(circle, var(--cyan) 0%, transparent 70%); bottom:-15%; left:20%; animation:drift3 19s ease-in-out infinite;}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(140px,90px) scale(1.25);}66%{transform:translate(-80px,60px) scale(0.9);}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-130px,110px) scale(0.88);}66%{transform:translate(60px,-70px) scale(1.2);}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(110px,-90px) scale(1.2);}66%{transform:translate(-100px,-40px) scale(0.92);}}
+
+/* ---------- Scroll progress ---------- */
+#scroll-progress{
+  position:fixed; top:0; left:0; height:3px; width:0%; z-index:200;
+  background:linear-gradient(90deg, var(--orange), var(--violet), var(--cyan));
+  box-shadow:0 0 12px rgba(242,129,29,0.6);
+}
 
 #grain{position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.03; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
@@ -137,19 +144,24 @@ nav{max-width:1200px; margin:0 auto; padding:0 32px; display:flex; align-items:c
 
 /* ---------- Section chrome ---------- */
 .eyebrow{
-  display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:0.76rem;
+  display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.76rem;
   letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-soft); margin-bottom:18px;
 }
-.eyebrow::before{content:''; width:7px;height:7px;border-radius:50%; background:var(--orange); box-shadow:0 0 12px var(--orange);}
+.eyebrow::before{content:none;}
+.eyebrow-orbit{width:16px;height:16px;flex-shrink:0; overflow:visible;}
+.eyebrow-orbit-dot{animation:spin360 4s linear infinite; transform-origin:8px 8px; fill:var(--orange);}
 .section-title{
   font-family:var(--display); font-weight:600; font-size:clamp(1.9rem, 3.6vw, 2.9rem);
   letter-spacing:-0.02em; max-width:680px; line-height:1.15;
 }
 .section-lede{margin-top:18px; font-size:1.08rem; line-height:1.7; color:var(--slate); max-width:600px;}
 .gradient-text{
-  background:linear-gradient(120deg, var(--white) 20%, var(--orange-soft) 55%, var(--cyan) 100%);
+  background:linear-gradient(90deg, var(--white) 0%, var(--orange-soft) 25%, var(--violet) 50%, var(--cyan) 75%, var(--white) 100%);
+  background-size:250% 100%;
   -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:gradientShift 7s linear infinite;
 }
+@keyframes gradientShift{0%{background-position:0% 50%;}100%{background-position:-150% 50%;}}
 section{padding:150px 0;}
 @media (max-width:900px){ section{padding:100px 0;} }
 
@@ -157,14 +169,68 @@ section{padding:150px 0;}
 .glass{
   background:var(--glass); border:1px solid var(--line); border-radius:20px;
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  transition:transform 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transition:transform 0.12s linear, border-color 0.35s var(--ease), background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transform-style:preserve-3d; will-change:transform;
 }
-.glass:hover{transform:translateY(-6px); border-color:rgba(242,129,29,0.35); background:var(--glass-hover); box-shadow:0 24px 48px -20px rgba(0,0,0,0.5);}
+.glass:hover{border-color:rgba(242,129,29,0.35); background:var(--glass-hover); box-shadow:0 24px 48px -20px rgba(0,0,0,0.5);}
+.glass:not(.tilting):hover{transform:translateY(-6px);}
+
+/* ---------- Floating continuo (icone, chip) ---------- */
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+.float{animation:floaty 4.5s ease-in-out infinite;}
+.subject-icon-wrap{animation:floaty 4.5s ease-in-out infinite;}
+.bento-b .subject-icon-wrap{animation-delay:0.3s;}
+.bento-c .subject-icon-wrap{animation-delay:0.6s;}
+.bento-d .subject-icon-wrap{animation-delay:0.9s;}
+.bento-e .subject-icon-wrap{animation-delay:1.2s;}
+.stat-chip{animation:floaty 5s ease-in-out infinite;}
+.hero-stats .stat-chip:nth-child(2){animation-delay:0.5s;}
+.hero-stats .stat-chip:nth-child(3){animation-delay:1s;}
+
+/* ---------- Marquee infinito ---------- */
+.marquee{
+  overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  padding:20px 0; background:rgba(255,255,255,0.02); position:relative; z-index:3;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track{
+  display:flex; gap:48px; width:max-content; animation:marquee 26s linear infinite;
+  font-family:var(--mono); letter-spacing:0.14em; color:var(--slate-light); font-size:0.82rem; white-space:nowrap;
+}
+.marquee-track span{display:inline-flex; align-items:center; gap:48px;}
+.marquee-track em{color:var(--orange); font-style:normal;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+
+/* ---------- Shimmer sui bottoni primari ---------- */
+.btn-primary, .nav-cta, .form-submit{position:relative; overflow:hidden;}
+.btn-primary::after, .nav-cta::after, .form-submit::after{
+  content:''; position:absolute; top:0; left:0; width:60%; height:100%;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  transform:translateX(-160%) skewX(-15deg); animation:shimmer 4.5s ease-in-out infinite;
+}
+@keyframes shimmer{0%,55%{transform:translateX(-160%) skewX(-15deg);}75%{transform:translateX(220%) skewX(-15deg);}100%{transform:translateX(220%) skewX(-15deg);}}
+
+/* ---------- Bordo animato sulla card "consigliato" ---------- */
+.package-card.best{position:relative; border-color:transparent;}
+.package-card.best::after{
+  content:''; position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:1; pointer-events:none;
+  background:conic-gradient(from var(--spin-angle,0deg), var(--orange), var(--violet), var(--cyan), var(--orange));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  animation:spinBorder 5s linear infinite;
+}
+@property --spin-angle{syntax:'<angle>'; inherits:false; initial-value:0deg;}
+@keyframes spinBorder{to{--spin-angle:360deg;}}
 
 /* ---------- HERO ---------- */
 #hero{min-height:100vh; display:flex; align-items:center; padding-top:120px; overflow:hidden;}
 .hero-inner{max-width:1200px; margin:0 auto; padding:0 32px; width:100%; position:relative;}
 .hero-orbit-svg{position:absolute; right:-16%; top:50%; transform:translateY(-50%); width:900px; height:900px; pointer-events:none; opacity:0.9; z-index:0;}
+.orbit-rotate{transform-origin:460px 460px; animation:spin360 70s linear infinite;}
+.orbit-rotate.reverse{animation-duration:100s; animation-direction:reverse;}
+@keyframes spin360{to{transform:rotate(360deg);}}
 .orbit-ring-line{fill:none; stroke:rgba(255,255,255,0.08); stroke-width:1;}
 .orbit-ring-line.accent{stroke:url(#ringGradient); stroke-width:1.2;}
 .orbit-star-core{fill:var(--orange); filter:drop-shadow(0 0 24px rgba(242,129,29,0.85));}

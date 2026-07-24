@@ -36,10 +36,11 @@ document.querySelectorAll('.magnetic').forEach(btn => {
   btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
 });
 
-// Nav: stato scrolled + link attivo per sezione
+// Nav: stato scrolled + link attivo per sezione + barra di progresso scroll
 const header = document.querySelector('header');
 const sections = document.querySelectorAll('main section[id]');
 const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const progressBar = document.getElementById('scroll-progress');
 function onScroll() {
   header.classList.toggle('scrolled', window.scrollY > 40);
   let current = '';
@@ -47,9 +48,33 @@ function onScroll() {
     if (window.scrollY + 140 >= s.offsetTop) current = s.id;
   });
   navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  if (progressBar) {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+// Tilt 3D al passaggio del mouse sulle card di vetro (solo desktop)
+if (matchMedia('(min-width:901px)').matches && matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.glass').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      const rx = (py - 0.5) * -7;
+      const ry = (px - 0.5) * 7;
+      card.classList.add('tilting');
+      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px) translateZ(0)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('tilting');
+      card.style.transform = '';
+    });
+  });
+}
 
 // Nav mobile toggle
 const navToggle = document.querySelector('.nav-toggle');
