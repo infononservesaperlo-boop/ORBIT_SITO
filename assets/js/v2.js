@@ -16,6 +16,81 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 revealEls.forEach(el => io.observe(el));
 
+// Smooth scroll a inerzia (nessuna libreria esterna): il contenuto vero e
+// proprio sta in #smooth-content (position:fixed) e viene traslato in base
+// a un lerp verso lo scrollY reale; #smooth-spacer dà al documento la sua
+// altezza vera così lo scroll nativo (e gli anchor link) restano corretti.
+const smoothContent = document.getElementById('smooth-content');
+const smoothSpacer = document.getElementById('smooth-spacer');
+const useSmoothScroll = matchMedia('(hover:hover) and (pointer:fine)').matches
+  && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (smoothContent && smoothSpacer && useSmoothScroll) {
+  document.documentElement.classList.add('smooth-active');
+  let smoothCurrent = window.scrollY;
+  function resizeSpacer() { smoothSpacer.style.height = smoothContent.scrollHeight + 'px'; }
+  window.addEventListener('resize', resizeSpacer);
+  window.addEventListener('load', resizeSpacer);
+  if (window.ResizeObserver) new ResizeObserver(resizeSpacer).observe(smoothContent);
+  resizeSpacer();
+  setTimeout(resizeSpacer, 600); // dopo il caricamento dei font
+
+  function smoothLoop() {
+    const target = window.scrollY;
+    smoothCurrent += (target - smoothCurrent) * 0.09;
+    if (Math.abs(target - smoothCurrent) < 0.04) smoothCurrent = target;
+    smoothContent.style.transform = `translate3d(0, ${-smoothCurrent}px, 0)`;
+    requestAnimationFrame(smoothLoop);
+  }
+  requestAnimationFrame(smoothLoop);
+}
+
+// Scroll manuale per i link-ancora: con #smooth-content in position:fixed
+// il salto nativo del browser non calcola lo scroll giusto, quindi lo
+// facciamo a mano (getBoundingClientRect riflette comunque la posizione
+// visuale reale, transform incluso).
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  const id = a.getAttribute('href').slice(1);
+  if (!id) return;
+  a.addEventListener('click', (e) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    const headerOffset = 90;
+    const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset);
+    window.scrollTo({ top: y, left: 0, behavior: document.documentElement.classList.contains('smooth-active') ? 'auto' : 'smooth' });
+    history.pushState(null, '', '#' + id);
+  });
+});
+
+// Cursore personalizzato: puntino che segue il mouse + anello con inerzia,
+// che si allarga sopra link/bottoni/card.
+const cursorDot = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+if (cursorDot && cursorRing && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+    cursorDot.classList.add('visible');
+    cursorRing.classList.add('visible');
+  }, { passive: true });
+
+  function ringLoop() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(ringLoop);
+  }
+  requestAnimationFrame(ringLoop);
+
+  document.querySelectorAll('a, button, input, textarea, .glass').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+}
+
 // Cursor glow (desktop only)
 const glow = document.getElementById('cursor-glow');
 if (glow && matchMedia('(min-width:901px)').matches) {

@@ -27,7 +27,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth; overflow-x:hidden; width:100%;}
+html{overflow-x:hidden; width:100%;}
 body{
   font-family:var(--body);
   color:var(--white);
@@ -82,6 +82,36 @@ button{font-family:inherit;border:none;background:none;color:inherit;cursor:poin
   transition:opacity 0.3s ease; mix-blend-mode:screen;
 }
 @media (max-width:900px){ #cursor-glow{display:none;} }
+
+/* ---------- Cursore personalizzato ---------- */
+@media (hover:hover) and (pointer:fine){
+  html, body, a, button{cursor:none !important;}
+  input, textarea{cursor:text !important;}
+}
+#cursor-dot, #cursor-ring{
+  position:fixed; top:0; left:0; z-index:201; pointer-events:none;
+  transform:translate(-50%,-50%); border-radius:50%;
+}
+#cursor-dot{
+  width:7px; height:7px; background:var(--orange); opacity:0;
+  transition:opacity 0.2s ease, width 0.2s var(--ease), height 0.2s var(--ease), background 0.2s ease;
+}
+#cursor-ring{
+  width:38px; height:38px; border:1.3px solid rgba(255,255,255,0.4); opacity:0;
+  transition:opacity 0.2s ease, width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.25s ease, background 0.25s ease;
+}
+#cursor-dot.visible, #cursor-ring.visible{opacity:1;}
+#cursor-ring.hover{width:64px; height:64px; border-color:transparent; background:rgba(242,129,29,0.16);}
+#cursor-dot.hover{width:0; height:0;}
+@media (max-width:900px), (hover:none), (pointer:coarse){
+  #cursor-dot, #cursor-ring{display:none;}
+  html, body, a, button{cursor:auto !important;}
+}
+
+/* ---------- Smooth scroll (inerzia) — solo desktop con mouse, vedi v2.js ---------- */
+html.smooth-active #smooth-content{position:fixed; top:0; left:0; width:100%; will-change:transform;}
+#smooth-spacer{width:1px; display:none;}
+html.smooth-active #smooth-spacer{display:block;}
 
 section, header, footer{position:relative; z-index:3;}
 
@@ -227,6 +257,19 @@ section{padding:150px 0;}
 /* ---------- HERO ---------- */
 #hero{min-height:100vh; display:flex; align-items:center; padding-top:120px; overflow:hidden;}
 .hero-inner{max-width:1200px; margin:0 auto; padding:0 32px; width:100%; position:relative;}
+
+/* ---------- Testo cinetico gigante dietro l'hero ---------- */
+.hero-kinetic{
+  position:absolute; top:50%; left:0; width:100%; transform:translateY(-50%);
+  z-index:0; overflow:hidden; pointer-events:none; user-select:none;
+}
+.hero-kinetic-track{
+  display:flex; width:max-content; white-space:nowrap;
+  font-family:var(--display); font-weight:700; font-size:clamp(6rem, 16vw, 13rem);
+  color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.07);
+  animation:kineticDrift 40s linear infinite;
+}
+@keyframes kineticDrift{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .hero-orbit-svg{position:absolute; right:-16%; top:50%; transform:translateY(-50%); width:900px; height:900px; pointer-events:none; opacity:0.9; z-index:0;}
 .orbit-rotate{transform-origin:460px 460px; animation:spin360 70s linear infinite;}
 .orbit-rotate.reverse{animation-duration:100s; animation-direction:reverse;}
