@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbit Ripetizioni — Matematica, Fisica, Chimica, Informatica | Milano</title>
+<meta name="description" content="Lezioni private di matematica, fisica, chimica e informatica a Milano. Metodo ORBIT: domande guida, non soluzioni pronte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/v2.css">
+</head>
+<body>
+
+<div id="mesh"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<div id="grain"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <nav>
+    <a href="#hero" class="brand">
+      <img src="../assets/img/logo.png" alt="Orbit Ripetizioni">
+    </a>
+    <div class="nav-links">
+      <a href="#chi-sono">Chi sono</a>
+      <a href="#materie">Materie</a>
+      <a href="#corsi">Corsi</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="https://wa.me/393319241103" class="nav-cta magnetic">Scrivimi</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu"><span></span></button>
+  </nav>
+</header>
+
+<main>
+
+<section id="hero">
+  <svg class="hero-orbit-svg" viewBox="0 0 920 920">
+    <defs>
+      <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F2811D"/>
+        <stop offset="50%" stop-color="#7C6CF9"/>
+        <stop offset="100%" stop-color="#22D3EE"/>
+      </linearGradient>
+    </defs>
+    <circle class="orbit-star-core" cx="460" cy="460" r="5"></circle>
+    <ellipse class="orbit-ring-line" cx="460" cy="460" rx="430" ry="430"></ellipse>
+    <ellipse class="orbit-ring-line accent" cx="460" cy="460" rx="310" ry="310"></ellipse>
+    <ellipse class="orbit-ring-line" cx="460" cy="460" rx="200" ry="200"></ellipse>
+    <circle class="planet-a" r="7">
+      <animateMotion dur="16s" repeatCount="indefinite" path="M 890,460 A 430,430 0 1,1 30,460 A 430,430 0 1,1 890,460"></animateMotion>
+    </circle>
+    <circle class="planet-b" r="5">
+      <animateMotion dur="10s" repeatCount="indefinite" path="M 770,460 A 310,310 0 1,0 150,460 A 310,310 0 1,0 770,460"></animateMotion>
+    </circle>
+    <circle class="planet-c" r="4">
+      <animateMotion dur="6.5s" repeatCount="indefinite" path="M 660,460 A 200,200 0 1,1 260,460 A 200,200 0 1,1 660,460"></animateMotion>
+    </circle>
+  </svg>
+  <div class="hero-inner">
+    <span class="eyebrow reveal">Milano · Online e in presenza</span>
+    <h1 class="hero-title reveal">La tua traiettoria verso<br>il <span class="gradient-text">voto che vuoi</span>.</h1>
+    <p class="hero-sub reveal">Lezioni private di matematica, fisica, chimica e informatica. Dal recupero di un'insufficienza alla preparazione per i test universitari.</p>
+    <div class="hero-ctas reveal">
+      <a href="https://wa.me/393319241103" class="btn btn-primary magnetic">Scrivimi su WhatsApp →</a>
+      <a href="#come-funziona" class="btn btn-glass magnetic">Come funziona</a>
+    </div>
+    <div class="hero-stats reveal-group">
+      <div class="stat-chip glass reveal"><div class="stat-num" data-count="40+">0</div><div class="stat-label">studenti seguiti</div></div>
+      <div class="stat-chip glass reveal"><div class="stat-num" data-count="5">0</div><div class="stat-label">anni di esperienza</div></div>
+      <div class="stat-chip glass reveal"><div class="stat-num" data-count="4">0</div><div class="stat-label">materie coperte</div></div>
+    </div>
+    <div class="scroll-cue"><span class="line"></span>Scorri</div>
+  </div>
+</section>
+
+<section id="chi-sono">
+  <div class="wrap">
+    <span class="eyebrow reveal">Chi sono</span>
+    <h2 class="section-title reveal">Non ti spiego solo la formula. Ti spiego <span class="gradient-text">perché funziona</span>.</h2>
+    <div class="chisono-grid">
+      <div class="photo-card reveal">
+        <img src="../assets/img/author-matteo.jpeg" alt="Matteo Casadei">
+      </div>
+      <div class="bio reveal">
+        <p><strong>Sono Matteo Casadei</strong>, 23 anni, laureato in Fisica. Faccio ripetizioni da quando ne avevo 18: nel frattempo ho seguito studenti di ogni indirizzo — scientifico, classico, linguistico, artistico, professionale — e universitari alle prese con i primi esami tecnici.</p>
+        <p>Il mio obiettivo è semplice: far capire davvero gli argomenti, trasformando la comprensione in risultati concreti. Non si tratta di imparare a memoria, ma di ragionare — per questo lavoro molto sugli errori, non solo sulle regole: è lì che si vede cosa non è ancora chiaro.</p>
+        <div class="mini-stats">
+          <div><div class="mini-stat-num">40+</div><div class="mini-stat-label">Studenti seguiti</div></div>
+          <div><div class="mini-stat-num">Tutti</div><div class="mini-stat-label">gli indirizzi di scuola</div></div>
+          <div><div class="mini-stat-num">+ Uni</div><div class="mini-stat-label">Anche esami universitari</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="materie">
+  <div class="wrap">
+    <span class="eyebrow reveal">Cosa insegno</span>
+    <h2 class="section-title reveal">Cinque materie, <span class="gradient-text">un solo metodo</span>.</h2>
+    <p class="section-lede reveal">Dalle superiori all'università, lezioni costruite sul programma reale dello studente — non su uno schema fisso.</p>
+    <div class="bento-grid reveal-group">
+      <div class="glass bento-a reveal">
+        <div class="subject-icon-wrap"><svg width="24" height="24" viewBox="0 0 42 42" fill="none"><path d="M8 34L21 8L34 34H8Z" stroke="#F2811D" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 24H28" stroke="#F2811D" stroke-width="1.6"/></svg></div>
+        <div>
+          <h3>Matematica</h3>
+          <span class="subject-level">Medie e superiori</span>
+          <ul><li>Recupero argomenti</li><li>Metodo di studio</li><li>Esercizi guidati</li><li>Preparazione verifiche ed esami</li></ul>
+        </div>
+      </div>
+      <div class="glass bento-b reveal">
+        <div class="subject-icon-wrap"><svg width="24" height="24" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="13" stroke="#F2811D" stroke-width="1.6"/><ellipse cx="21" cy="21" rx="13" ry="5" stroke="#F2811D" stroke-width="1.6"/></svg></div>
+        <div>
+          <h3>Fisica</h3>
+          <span class="subject-level">Medie, superiori e università</span>
+          <ul><li>Consolidamento della teoria</li><li>Metodo di approccio agli esercizi</li><li>Preparazione verifiche ed esami</li></ul>
+        </div>
+      </div>
+      <div class="glass bento-c reveal">
+        <div class="subject-icon-wrap"><svg width="24" height="24" viewBox="0 0 42 42" fill="none"><path d="M16 8H26V16L33 30C34 32 32.5 34 30.5 34H11.5C9.5 34 8 32 9 30L16 16V8Z" stroke="#F2811D" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 8H28" stroke="#F2811D" stroke-width="1.6"/></svg></div>
+        <div>
+          <h3>Chimica</h3>
+          <span class="subject-level">Medie e superiori</span>
+          <ul><li>Chimica generale</li><li>Reazioni e stechiometria</li><li>Esercizi guidati</li></ul>
+        </div>
+      </div>
+      <div class="glass bento-d reveal">
+        <div class="subject-icon-wrap"><svg width="24" height="24" viewBox="0 0 42 42" fill="none"><rect x="8" y="10" width="26" height="18" rx="2" stroke="#F2811D" stroke-width="1.6"/><path d="M14 34H28" stroke="#F2811D" stroke-width="1.6"/></svg></div>
+        <div>
+          <h3>Informatica</h3>
+          <span class="subject-level">Supporto universitario e scolastico</span>
+          <ul><li>Python e C++</li><li>Logica e problem solving</li><li>Algoritmi e basi di programmazione</li></ul>
+        </div>
+      </div>
+      <div class="glass bento-e reveal">
+        <div class="subject-icon-wrap"><svg width="24" height="24" viewBox="0 0 42 42" fill="none"><path d="M21 6L35 13V27L21 34L7 27V13L21 6Z" stroke="#F2811D" stroke-width="1.6" stroke-linejoin="round"/><path d="M21 20V34M21 20L7 13M21 20L35 13" stroke="#F2811D" stroke-width="1.6"/></svg></div>
+        <div>
+          <h3>Test universitari</h3>
+          <span class="subject-level">Medicina, TOLC, ARCHED</span>
+          <ul><li>Ripasso mirato per materia</li><li>Simulazioni cronometrate</li><li>Strategie di gestione del tempo</li></ul>
+        </div>
+      </div>
+      <div class="glass bento-cta reveal">
+        <div>
+          <h3 style="margin-top:0;">Cerchi un percorso diverso?</h3>
+          <p style="color:var(--slate); max-width:420px;">Ogni studente ha esigenze diverse. Scrivimi e troviamo insieme la soluzione più adatta a te.</p>
+        </div>
+        <a href="https://wa.me/393319241103" class="btn btn-primary magnetic">Scrivimi su WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo">
+  <div class="wrap">
+    <span class="eyebrow reveal">Metodo di studio</span>
+    <h2 class="section-title reveal">Un approccio didattico pensato per <span class="gradient-text">durare nel tempo</span>.</h2>
+    <p class="section-lede reveal">Non lezioni standard: un percorso costruito sui tuoi punti di forza e sui tuoi gap, per una crescita costante.</p>
+    <div class="metodo-grid reveal-group">
+      <div class="glass metodo-card reveal"><span class="num">01</span><h3>Lezioni personalizzate</h3><p>Adatto il piano di studio alle esigenze specifiche di ogni studente, identificando i punti di forza e i gap per una crescita costante e sostenibile.</p></div>
+      <div class="glass metodo-card reveal"><span class="num">02</span><h3>Schemi chiari</h3><p>Ogni argomento è strutturato con logica e precisione, utilizzando diagrammi e rappresentazioni visive per semplificare la comprensione.</p></div>
+      <div class="glass metodo-card reveal"><span class="num">03</span><h3>Esercizi mirati</h3><p>Pratiche mirate per la preparazione di verifiche ed esami, focalizzate su tipologie di domande frequenti e problemi complessi.</p></div>
+      <div class="glass metodo-card reveal"><span class="num">04</span><h3>Approccio semplice</h3><p>Un metodo rigoroso ma accessibile, che elimina la complessità e mette al centro la comprensione profonda dei concetti fondamentali.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="come-funziona">
+  <div class="wrap">
+    <span class="eyebrow reveal">Come funziona</span>
+    <h2 class="section-title reveal">Tre passaggi, come un'orbita.</h2>
+    <div class="timeline reveal-group">
+      <div class="timeline-step reveal"><span class="step-num">01</span><h3>Mi scrivi</h3><p>Su WhatsApp mi racconti la materia, la classe e cosa ti serve — recupero, mantenimento o preparazione a un esame.</p></div>
+      <div class="timeline-step reveal"><span class="step-num">02</span><h3>Definiamo il percorso</h3><p>Decidiamo insieme orari, frequenza e modalità: online o in presenza a Milano.</p></div>
+      <div class="timeline-step reveal"><span class="step-num">03</span><h3>Iniziamo</h3><p>Prima lezione diagnostica per capire dove sei, poi lavoriamo sul programma reale che stai affrontando.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="genitori">
+  <div class="wrap">
+    <span class="eyebrow reveal">Per i genitori</span>
+    <h2 class="section-title reveal">"Non riesce con la matematica" non è mai <span class="gradient-text">il problema vero</span>.</h2>
+    <div class="glass genitori-panel reveal">
+      <p>Quasi sempre dietro un'insufficienza c'è un metodo di studio che non si è mai adattato a come funziona davvero quella materia — non uno studente che "non è portato".</p>
+      <p>Il mio lavoro parte dal capire dov'è il blocco reale, non dal rifare l'ennesima spiegazione uguale a quella sentita in classe. Vi aggiorno periodicamente sui progressi, così sapete esattamente a che punto siamo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="corsi">
+  <div class="wrap">
+    <span class="eyebrow reveal">Corsi</span>
+    <h2 class="section-title reveal">Un formato per <span class="gradient-text">ogni esigenza</span>.</h2>
+    <div class="courses-grid reveal-group">
+      <div class="glass course-card reveal">
+        <span class="course-tag">Individuali e personalizzate</span>
+        <h3>Lezioni singole</h3>
+        <div class="course-price">25€/h</div>
+        <ul><li>Percorso mirato e continuo durante tutto l'anno</li><li>Recupero per settembre</li><li>Preparazione maturità</li><li>Preparazione esame di terza media</li><li>Preparazione esami universitari</li></ul>
+      </div>
+      <div class="glass course-card reveal">
+        <span class="course-tag">Collaborazione e supporto</span>
+        <h3>Lezioni di gruppo</h3>
+        <div class="course-price">15€/h <span style="font-size:0.75rem;color:var(--slate-light);font-weight:400;">a testa</span></div>
+        <ul><li>Minimo 3 partecipanti</li><li>Tutte le materie STEM</li><li>In presenza e online</li></ul>
+      </div>
+      <div class="glass course-card reveal">
+        <span class="course-tag">Preparazione mirata</span>
+        <h3>Test universitari</h3>
+        <div class="course-price">28€/h</div>
+        <ul><li>Test d'ingresso Medicina</li><li>TOLC-S, TOLC-I, TOLC-B</li><li>Test ARCHED</li></ul>
+      </div>
+      <div class="glass course-card reveal">
+        <span class="course-tag">Arduino e coding</span>
+        <h3>Python &amp; Robotica</h3>
+        <div class="course-price">20€/h <span style="font-size:0.75rem;color:var(--slate-light);font-weight:400;">a testa</span></div>
+        <ul><li>Minimo 3 partecipanti</li><li>Introduzione a Python</li><li>Introduzione ad Arduino</li><li>Come costruire un robot</li></ul>
+      </div>
+    </div>
+    <p class="courses-note reveal">Hai bisogno di un percorso diverso? <a href="https://wa.me/393319241103">Scrivimi su WhatsApp</a> e troviamo insieme la soluzione più adatta.</p>
+
+    <h3 class="section-title reveal" style="font-size:1.4rem; margin-top:64px;">Pacchetti a ore — più ore prenoti, meno paghi.</h3>
+    <div class="packages-grid reveal-group">
+      <div class="glass package-card reveal">
+        <div class="package-hours">10 <span>ore</span></div>
+        <div class="package-discount-badge">−10%</div>
+        <div class="package-perhour">22,50€ <span>/ora</span></div>
+        <div class="package-total">Totale: 225€</div>
+      </div>
+      <div class="glass package-card best reveal">
+        <div class="package-hours">20 <span>ore</span></div>
+        <div class="package-discount-badge">−15%</div>
+        <div class="package-perhour">21,25€ <span>/ora</span></div>
+        <div class="package-total">Totale: 425€</div>
+      </div>
+      <div class="glass package-card reveal">
+        <div class="package-hours">25 <span>ore</span></div>
+        <div class="package-discount-badge">−20%</div>
+        <div class="package-perhour">20€ <span>/ora</span></div>
+        <div class="package-total">Totale: 500€</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonianze">
+  <div class="wrap">
+    <span class="eyebrow reveal">Cosa dicono gli studenti</span>
+    <h2 class="section-title reveal">Recensioni reali, <span class="gradient-text">da medie e superiori all'università</span>.</h2>
+    <div class="testimonials-grid reveal-group">
+      <div class="glass testimonial-card reveal">
+        <div class="testimonial-mark">"</div>
+        <p>Grazie alle spiegazioni chiare sono riuscito a recuperare il debito in matematica. Matteo è molto paziente e disponibile.</p>
+        <div class="testimonial-meta"><div class="testimonial-name">Marco R.</div><div class="testimonial-role">Quinta superiore · Matematica</div></div>
+      </div>
+      <div class="glass testimonial-card reveal">
+        <div class="testimonial-mark">"</div>
+        <p>Matteo è un insegnante davvero ottimo: preparato, ma soprattutto capace di mettere lo studente a suo agio. Dopo la teoria fa sempre svolgere esercizi, così è più semplice chiarire i dubbi.</p>
+        <div class="testimonial-meta"><div class="testimonial-name">Sara D.</div><div class="testimonial-role">Quarta superiore · Fisica</div></div>
+      </div>
+      <div class="glass testimonial-card reveal">
+        <div class="testimonial-mark">"</div>
+        <p>Forse il prof più bravo che abbia mai avuto. Ti segue, capisce sempre se c'è un dubbio ed è molto paziente. Non solo un ottimo insegnante, ma anche una gran persona.</p>
+        <div class="testimonial-meta"><div class="testimonial-name">Paola D.</div><div class="testimonial-role">Terza media · Chimica</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="guide">
+  <div class="wrap">
+    <span class="eyebrow reveal">Blog</span>
+    <h2 class="section-title reveal">Approfondimenti su <span class="gradient-text">studio, esami e metodo</span>.</h2>
+    <p class="section-lede reveal">Metodi di studio, esercizi commentati e curiosità su matematica, fisica, chimica e informatica.</p>
+    <div class="glass blog-teaser reveal">
+      <div>
+        <h3>Il Metodo ORBIT: perché non ti do mai la soluzione subito</h3>
+        <p>Come funziona davvero una lezione ORBIT: domande guida, tre modalità e la verifica di plausibilità.</p>
+      </div>
+      <a href="../blog/index.html" class="btn btn-primary magnetic">Vai al blog →</a>
+    </div>
+  </div>
+</section>
+
+<section id="visione">
+  <div class="wrap">
+    <span class="eyebrow reveal">Il progetto Orbit</span>
+    <h2 class="section-title reveal">Oggi sono io. <span class="gradient-text">L'idea è più grande.</span></h2>
+    <p class="section-lede reveal">Orbit nasce come lezioni private, ma l'obiettivo è costruire qualcosa di più strutturato: un punto di riferimento per chi studia materie scientifiche, a qualsiasi livello.</p>
+    <div class="roadmap reveal-group">
+      <div class="glass roadmap-item reveal"><span class="roadmap-tag">Oggi</span><h4>Lezioni individuali e di gruppo</h4><p>Matematica, fisica, chimica, informatica, test universitari e Python &amp; Robotica — seguite direttamente da me.</p></div>
+      <div class="glass roadmap-item future reveal"><span class="roadmap-tag">Prossimo passo</span><h4>Un team di insegnanti</h4><p>Più docenti, ognuno specializzato, per coprire più materie e più orari in contemporanea.</p></div>
+      <div class="glass roadmap-item future reveal"><span class="roadmap-tag">Visione</span><h4>Un centro studi con lezioni on demand</h4><p>Contenuti video registrati, disponibili in abbonamento, per ripassare quando serve.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contatti">
+  <div class="wrap">
+    <span class="eyebrow reveal">Contatti e disponibilità</span>
+    <h2 class="section-title reveal">Scrivimi e iniziamo dalla <span class="gradient-text">prima lezione</span>.</h2>
+    <p class="section-lede reveal">Rispondo su WhatsApp di solito entro giornata, oppure compila il modulo qui accanto.</p>
+    <div class="contatti-grid">
+      <div class="glass contatti-panel reveal">
+        <a href="https://wa.me/393319241103" class="btn btn-primary magnetic">Scrivimi su WhatsApp →</a>
+        <div class="contact-meta">
+          <div><div class="contact-meta-label">Dove</div><div class="contact-meta-val">Via Mac Mahon 45, Milano — in presenza od online</div></div>
+          <div><div class="contact-meta-label">Contatto</div><div class="contact-meta-val">+39 331 924 1103 (WhatsApp)</div></div>
+          <div><div class="contact-meta-label">Email</div><div class="contact-meta-val">ripetizioni.matteocasadei@gmail.com</div></div>
+          <div><div class="contact-meta-label">Materie</div><div class="contact-meta-val">Matematica · Fisica · Chimica · Informatica</div></div>
+        </div>
+      </div>
+      <form class="glass contact-form reveal" id="contact-form">
+        <div class="form-row"><label for="f-name">Nome</label><input type="text" id="f-name" placeholder="Il tuo nome" required></div>
+        <div class="form-row"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="nome@email.com" required></div>
+        <div class="form-row">
+          <label>Materie di interesse</label>
+          <div class="subject-checks">
+            <label><input type="checkbox" name="materia" value="Matematica"> Matematica</label>
+            <label><input type="checkbox" name="materia" value="Fisica"> Fisica</label>
+            <label><input type="checkbox" name="materia" value="Chimica"> Chimica</label>
+            <label><input type="checkbox" name="materia" value="Informatica"> Informatica</label>
+          </div>
+        </div>
+        <div class="form-row"><label for="f-msg">Messaggio</label><textarea id="f-msg" rows="4" placeholder="Raccontami di cosa hai bisogno..." required></textarea></div>
+        <button type="submit" class="form-submit">Invia richiesta</button>
+        <p class="form-hint">Si aprirà il tuo programma email con il messaggio già pronto.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand"><img src="../assets/img/logo.png" alt="Orbit Ripetizioni"></div>
+    <div class="footer-links">
+      <a href="#hero">Torna su</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="https://wa.me/393319241103">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/v2.js"></script>
+</body>
+</html>

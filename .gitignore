@@ -4,3 +4,5 @@ manim/export/*.mp4
 __pycache__/
 *.pyc
 .DS_Store
+.tools/
+node_modules/
