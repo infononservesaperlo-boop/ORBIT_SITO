@@ -22,8 +22,10 @@ revealEls.forEach(el => io.observe(el));
 // altezza vera così lo scroll nativo (e gli anchor link) restano corretti.
 const smoothContent = document.getElementById('smooth-content');
 const smoothSpacer = document.getElementById('smooth-spacer');
+const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 const useSmoothScroll = matchMedia('(hover:hover) and (pointer:fine)').matches
-  && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  && !matchMedia('(prefers-reduced-motion: reduce)').matches
+  && !isTouchDevice;
 if (smoothContent && smoothSpacer && useSmoothScroll) {
   document.documentElement.classList.add('smooth-active');
   let smoothCurrent = window.scrollY;
