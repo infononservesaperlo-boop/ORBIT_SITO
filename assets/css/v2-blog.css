@@ -43,7 +43,10 @@
 /* ---------- Cover del post ---------- */
 .post-cover{max-width:960px; margin:0 auto; padding:0 32px 0; position:relative; z-index:1;}
 .post-cover .glass{padding:8px; border-radius:22px;}
-.post-cover video{width:100%; border-radius:16px; display:block;}
+.post-cover video{width:100%; border-radius:16px; display:block; pointer-events:none;}
+
+/* ---------- Video ambientali nel corpo articolo (no controlli, solo loop) ---------- */
+.post-body figure video{pointer-events:none;}
 
 /* ---------- Corpo articolo ---------- */
 article.post-body{max-width:720px; margin:0 auto; padding:80px 32px 40px; font-size:1.08rem; line-height:1.85;}
