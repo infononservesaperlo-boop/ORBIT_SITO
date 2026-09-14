@@ -57,13 +57,17 @@
     position:relative;
     overflow:hidden;
     background-color:var(--ink);
-    background-image:
-      radial-gradient(circle at 12% -6%, rgba(242,129,29,0.22), transparent 42%),
-      radial-gradient(circle at 105% 26%, rgba(124,108,249,0.18), transparent 40%),
-      radial-gradient(circle at 6% 96%, rgba(34,211,238,0.15), transparent 38%);
     padding:70px 64px 0;
     color:var(--white);
   }
+  /* mesh gradient blur (replica #mesh del sito reale) */
+  .mesh{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .mesh .blob{position:absolute; border-radius:50%; filter:blur(95px);}
+  .mesh .b1{width:620px; height:620px; background:radial-gradient(circle, var(--orange) 0%, transparent 70%); opacity:0.5; top:-220px; left:-200px;}
+  .mesh .b2{width:560px; height:560px; background:radial-gradient(circle, var(--violet) 0%, transparent 70%); opacity:0.45; top:120px; right:-220px;}
+  .mesh .b3{width:520px; height:520px; background:radial-gradient(circle, var(--cyan) 0%, transparent 70%); opacity:0.4; bottom:120px; left:-160px;}
+  .mesh .b4{width:480px; height:480px; background:radial-gradient(circle, var(--orange) 0%, transparent 70%); opacity:0.3; bottom:-200px; right:-140px;}
+  .content{position:relative; z-index:2;}
 
   /* ---- badge / orbit ring ---- */
   .badge-wrap{position:relative; display:flex; justify-content:center; align-items:center; height:230px;}
@@ -102,7 +106,7 @@
     width:56px; height:56px; border-radius:50%;
     background:var(--ink-2); border:3px solid var(--white);
     display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 18px rgba(0,0,0,0.4);
+    box-shadow:0 8px 18px rgba(0,0,0,0.4), 0 0 26px rgba(242,129,29,0.35);
   }
   .portrait-badge img{width:34px; height:34px; object-fit:contain;}
 
@@ -120,7 +124,7 @@
     font-size:58px; line-height:1.12; letter-spacing:-0.01em; margin-top:22px;
   }
   h1 .line1{display:block; color:var(--white);}
-  h1 .line2{display:block; color:var(--orange); margin-top:4px;}
+  .headline-gradient{display:block; margin:10px auto 0;}
 
   .subtitle{
     font-family:var(--body); font-size:22px; line-height:1.55; color:var(--slate);
@@ -155,11 +159,13 @@
     margin-top:26px; display:grid; grid-template-columns:1fr 1fr; gap:16px;
   }
   .materia-card{
-    background:var(--glass); border:1px solid var(--line); border-radius:20px; padding:26px 26px 24px;
+    background:rgba(255,255,255,0.055); border:1px solid var(--line); border-radius:20px; padding:26px 26px 24px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 40px -24px rgba(0,0,0,0.6);
   }
   .materia-icon{
-    width:52px; height:52px; border-radius:14px; background:rgba(242,129,29,0.12);
+    width:52px; height:52px; border-radius:14px; background:rgba(242,129,29,0.14);
     display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+    box-shadow:inset 0 0 0 1px rgba(242,129,29,0.25);
   }
   .materia-icon svg{width:28px; height:28px;}
   .materia-card h3{font-family:var(--display); font-weight:600; font-size:22px; margin-bottom:8px;}
@@ -168,7 +174,8 @@
   /* ---- chi siamo ---- */
   .chisiamo{
     margin-top:44px; display:flex; align-items:flex-start; gap:16px;
-    background:var(--glass); border:1px solid var(--line); border-radius:20px; padding:26px 28px;
+    background:rgba(255,255,255,0.055); border:1px solid var(--line); border-radius:20px; padding:26px 28px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 40px -24px rgba(0,0,0,0.6);
   }
   .chisiamo-icon{flex-shrink:0; width:44px; height:44px; margin-top:2px;}
   .chisiamo-icon svg{width:44px; height:44px;}
@@ -182,6 +189,7 @@
     background:linear-gradient(135deg, var(--orange), var(--orange-soft));
     padding:44px 64px 48px;
     display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
+    box-shadow:0 -20px 60px -20px rgba(242,129,29,0.45);
   }
   .cta-title{font-family:var(--display); font-weight:700; font-size:32px; color:var(--ink);}
   .cta-phone{
@@ -204,13 +212,33 @@
 
 <div id="poster">
 
+  <div class="mesh">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+  </div>
+
+  <div class="content">
+
   <div class="portrait-wrap">
     <svg class="portrait-ring" viewBox="0 0 230 230">
+      <defs>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F2811D"/>
+          <stop offset="50%" stop-color="#7C6CF9"/>
+          <stop offset="100%" stop-color="#22D3EE"/>
+        </linearGradient>
+        <filter id="dotGlow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
       <ellipse cx="115" cy="115" rx="108" ry="108" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1"></ellipse>
-      <ellipse cx="115" cy="115" rx="88" ry="88" fill="none" stroke="#F2811D" stroke-opacity="0.35" stroke-width="1.2"></ellipse>
-      <circle cx="223" cy="115" r="4.5" fill="#F2811D" opacity="0.9"></circle>
-      <circle cx="115" cy="7" r="3" fill="#22D3EE" opacity="0.85"></circle>
-      <circle cx="20" cy="165" r="3.2" fill="#FFFFFF" opacity="0.8"></circle>
+      <ellipse cx="115" cy="115" rx="88" ry="88" fill="none" stroke="url(#ringGrad)" stroke-opacity="0.55" stroke-width="1.2"></ellipse>
+      <circle cx="223" cy="115" r="4.5" fill="#F2811D" filter="url(#dotGlow)"></circle>
+      <circle cx="115" cy="7" r="3" fill="#22D3EE" filter="url(#dotGlow)"></circle>
+      <circle cx="20" cy="165" r="3.2" fill="#FFFFFF" opacity="0.9" filter="url(#dotGlow)"></circle>
     </svg>
     <label class="portrait-circle" id="portrait-circle" for="photo-input">
       <div class="portrait-placeholder">
@@ -232,7 +260,15 @@
 
   <h1>
     <span class="line1">Non la solita ora di ripetizioni.</span>
-    <span class="line2">Un metodo pensato per farne a meno.</span>
+    <svg id="headline-gradient" class="headline-gradient" viewBox="0 0 952 140" width="952" height="140">
+      <defs>
+        <linearGradient id="headGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#F9A752"/>
+          <stop offset="45%" stop-color="#7C6CF9"/>
+          <stop offset="100%" stop-color="#22D3EE"/>
+        </linearGradient>
+      </defs>
+    </svg>
   </h1>
 
   <p class="subtitle">Lezioni private dalle medie all'università — quattro aree, un solo metodo</p>
@@ -316,9 +352,62 @@
     </div>
   </div>
 
+  </div>
+
 </div>
 
 <script>
+  function wrapGradientHeadline(svgId, text, opts){
+    var svg = document.getElementById(svgId);
+    if(!svg) return;
+    var maxWidth = opts.maxWidth, fontSize = opts.fontSize, fontFamily = opts.fontFamily;
+    var fontWeight = opts.fontWeight || 700;
+    var lineHeight = opts.lineHeight || Math.round(fontSize * 1.14);
+    var canvas = wrapGradientHeadline._canvas || (wrapGradientHeadline._canvas = document.createElement('canvas'));
+    var ctx = canvas.getContext('2d');
+    ctx.font = fontWeight + ' ' + fontSize + 'px ' + fontFamily;
+    var words = text.split(' ');
+    var lines = [];
+    var current = '';
+    words.forEach(function(word){
+      var test = current ? current + ' ' + word : word;
+      if(ctx.measureText(test).width <= maxWidth || !current){
+        current = test;
+      } else {
+        lines.push(current);
+        current = word;
+      }
+    });
+    if(current) lines.push(current);
+
+    var svgNS = 'http://www.w3.org/2000/svg';
+    svg.querySelectorAll('text').forEach(function(n){ n.remove(); });
+    var startY = Math.round(fontSize * 0.92);
+    var totalHeight = (lines.length - 1) * lineHeight + startY + Math.round(fontSize * 0.28);
+    lines.forEach(function(line, i){
+      var t = document.createElementNS(svgNS, 'text');
+      t.setAttribute('x', maxWidth / 2);
+      t.setAttribute('y', startY + i * lineHeight);
+      t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('font-family', fontFamily);
+      t.setAttribute('font-weight', fontWeight);
+      t.setAttribute('font-size', fontSize);
+      t.setAttribute('fill', 'url(#headGrad)');
+      t.textContent = line;
+      svg.appendChild(t);
+    });
+    svg.setAttribute('viewBox', '0 0 ' + maxWidth + ' ' + totalHeight);
+    svg.setAttribute('height', totalHeight);
+    svg.setAttribute('width', maxWidth);
+  }
+
+  var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  fontsReady.then(function(){
+    wrapGradientHeadline('headline-gradient', 'Un metodo pensato per farne a meno.', {
+      maxWidth: 952, fontSize: 58, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700
+    });
+  });
+
   document.getElementById('photo-input').addEventListener('change', function(e){
     var file = e.target.files && e.target.files[0];
     if(!file) return;
@@ -336,10 +425,12 @@
     var poster = document.getElementById('poster');
     btn.disabled = true;
     btn.textContent = 'Sto generando...';
-    html2canvas(poster, {
-      scale: 2,
-      backgroundColor: '#050B18',
-      useCORS: true
+    fontsReady.then(function(){
+      return html2canvas(poster, {
+        scale: 2,
+        backgroundColor: '#050B18',
+        useCORS: true
+      });
     }).then(function(canvas){
       var link = document.createElement('a');
       link.download = 'orbit-locandina.png';
